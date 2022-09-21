@@ -105,6 +105,7 @@
 	      <url>http://18.218.151.93:8081/repository/JenkSnapshot/</url>
 	    </snapshotRepository>
 	    
+		
 	</distributionManagement>
 	
 	<build>
