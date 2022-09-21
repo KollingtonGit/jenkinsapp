@@ -1,7 +1,7 @@
 node{
   def mavenHome = tool name: 'Maven3.8.6'
   stage('1cloneCode'){
-    git "https://github.com/Org7892/JenkinsApp.git"
+    git "https://github.com/Peteoj/SCRIPTEDJENKINSAPP.git"
   }
   stage('2Test&Build'){
     sh "${mavenHome}/bin/mvn clean package"
@@ -12,14 +12,14 @@ node{
   }
   stage('4uploadArtifacts'){
     sh "${mavenHome}/bin/mvn deploy"
-    //http://18.118.49.68:8081/repository/JenkRelease/
-    //http://18.118.49.68:8081/repository/JenkSnapshot/
+    //http://18.218.151.93:8081/repository/JenkRelease/
+    //http://18.218.151.93:8081/repository/JenkSnapshot/
     // vi pom.xml and added repository details   
     // vi setting.xml and add AUTHENTICATION details  
   } 
   stage('5deploy2UAT'){
     sh "echo 'deploy to UAT'  "
-     //edit here if server changes
+    //edit here if server changes
     deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials1', path: '', url: 'http://3.22.63.165:8080/')], contextPath: null, war: 'target/*war'
   }
    stage('6approvalGate'){
@@ -29,8 +29,8 @@ node{
       }
   }
   stage('7deploy2Prod'){
-    sh "sleep  50" 
+    //sh "sleep  5" 
    //edit here if server changes
-    deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials1', path: '', url: 'http://3.22.63.165:8080/)], contextPath: null, war: 'target/*war'
+    deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials1', path: '', url: 'http://3.22.63.165:8080/')], contextPath: null, war: 'target/*war'
   }
 }
