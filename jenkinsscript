@@ -19,7 +19,7 @@ node{
   } 
   stage('5deploy2UAT'){
     sh "echo 'deploy to UAT'  "
-    //edit here if server changes
+     //edit here if server changes
     deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials1', path: '', url: 'http://18.217.126.8:8080/')], contextPath: null, war: 'target/*war'
   }
    stage('6approvalGate'){
@@ -29,7 +29,7 @@ node{
       }
   }
   stage('7deploy2Prod'){
-    //sh "sleep  50" 
+    sh "sleep  50" 
    //edit here if server changes
     deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials1', path: '', url: 'http://18.217.126.8:8080/')], contextPath: null, war: 'target/*war'
   }
